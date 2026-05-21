@@ -1,5 +1,5 @@
 /*
-    API route to make a booking on a scheduled flight.
+    API route to make a book a flight
 */
 import {ObjectId} from "mongodb";
 import {connectDB} from "@/lib/mongodb";
@@ -34,12 +34,12 @@ export async function POST(request: Request) {
         bookedAt: new Date(),
     };
 
-    await db.collection("schedules").updateOne(
+    await (db.collection("schedules") as any).updateOne(
         {_id: new ObjectId(scheduleId)},
         {$push: {bookings: booking}}
     );
 
-    await db.collection("passengers").updateOne(
+    await (db.collection("passengers") as any).updateOne(
         {email: email},
         {$set: {firstName: firstName, lastName: lastName, email: email},
          $push: {bookingRefs: ref}},

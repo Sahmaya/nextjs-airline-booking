@@ -1,6 +1,5 @@
 /*
-    This is the API route in order to search for scheduled flights between both the two airports within a preferred date range.
-    Endpoint: /api/schedules/search?orig=NZNE&dest=YSSY&date1=2026-06-01&date2=2026-06-30
+    API route to search for scheduled flights between two airports within a specified date range
 */
 import {ObjectId} from "mongodb";
 import {connectDB} from "@/lib/mongodb";
