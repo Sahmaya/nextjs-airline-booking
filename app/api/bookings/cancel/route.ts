@@ -15,7 +15,7 @@ export async function DELETE(request: Request) {
 
     const result = await db.collection("schedules").updateOne(
         {"bookings.ref": ref},
-        {$pull: {bookings: {ref: ref}}}
+        {$pull: {bookings: {ref: ref}}} as any
     );
 
     if (result.matchedCount === 0) {
