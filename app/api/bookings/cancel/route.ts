@@ -1,5 +1,5 @@
 /*
-    API route to cancel a booking by reference
+    API route to cancel a booking by reference.
 */
 import {connectDB} from "@/lib/mongodb";
 
@@ -13,6 +13,7 @@ export async function DELETE(request: Request) {
 
     const db = await connectDB();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = await db.collection("schedules").updateOne(
         {"bookings.ref": ref},
         {$pull: {bookings: {ref: ref}}} as any
@@ -24,7 +25,7 @@ export async function DELETE(request: Request) {
 
     await db.collection("passengers").updateOne(
         {bookingRefs: ref},
-        {$pull: {bookingRefs: ref}}
+        {$pull: {bookingRefs: ref}} as any
     );
 
     return Response.json({message: "Booking cancelled", ref: ref});
